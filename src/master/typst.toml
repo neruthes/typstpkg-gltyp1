@@ -1,0 +1,11 @@
+[package]
+
+name = "gltyp1"
+version = "nightly"
+entrypoint = "gltyp1.typ"
+authors = ["@Neruthes"]
+license = "MIT"
+description = "Freeze a moment of style state."
+repository = "https://github.com/neruthes/typstpkg-gltyp1"
+keywords = ["CG", "Render", "GL", "Shader"]
+categories = ["utility"]
