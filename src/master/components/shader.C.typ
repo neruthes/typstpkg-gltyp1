@@ -1,4 +1,3 @@
-// shader.C.typ
 #import "types.C.typ": *
 
 #let texture(tex, uv) = {
@@ -15,7 +14,6 @@
   }
 }
 
-// 执行 fragment，构造 ray：MAT / CTX / MAT_textures 都可用
 #let run-fragment(frag, mat, ctx) = {
   let ray = (
     MAT: mat,

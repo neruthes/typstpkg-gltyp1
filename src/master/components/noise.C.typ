@@ -1,9 +1,3 @@
-// gltyp1/noise.C.typ
-// Perlin noise，参数对齐 Godot FastNoiseLite 的 Perlin 生成器。
-// 返回 float（0..1 归一化），可直接作为灰度或喂给 texture-2d。
-
-// ---------- 基础工具 ----------
-
 #let _fade(t) = t * t * t * (t * (t * 6 - 15) + 10)
 
 #let _lerp(a, b, t) = a + t * (b - a)
@@ -22,11 +16,10 @@
   calc.rem(calc.abs(n), 256)
 }
 
-// ---------- Perlin 2D 采样核心 ----------
 
 #let perlin-2d(
   seed: 0,
-  frequency: 4.0, // 每单位 UV 的周期数
+  frequency: 4.0,
   octaves: 3,
   lacunarity: 2.0,
   gain: 0.5,
@@ -68,20 +61,18 @@
   if fractal-type == "ridged" { n } else { (n + 1.0) / 2.0 }
 }
 
-// ---------- Godot 风格纹理工厂 ----------
 
 #let perlin-texture(
   seed: 0,
-  width: 256, // 像素分辨率 X
-  height: 256, // 像素分辨率 Y
-  frequency: 4.0, // 整个纹理的周期数（横向）
+  width: 256,
+  height: 256,
+  frequency: 4.0,
   octaves: 3,
   lacunarity: 2.0,
   gain: 0.5,
   fractal-type: "fbm",
-  repeat: true, // 平铺模式：true = repeat, false = clamp
+  repeat: true,
 ) = {
-  // 预计算噪声场（0..1 灰度），分辨率 width × height
   let data = range(height).map(y => range(width).map(
     x => perlin-2d(
       seed: seed,
@@ -90,7 +81,7 @@
       lacunarity: lacunarity,
       gain: gain,
       fractal-type: fractal-type,
-    )(x / width, y / height), // 归一化到 0..1 UV
+    )(x / width, y / height),
   ))
 
   (
@@ -98,7 +89,7 @@
     width: width,
     height: height,
     repeat: repeat,
-    // 双线性插值采样，等价于 Godot 的默认线性过滤
+
     sample: (u, v) => {
       if repeat {
         u = calc.rem(u, 1.0)
@@ -107,7 +98,7 @@
         u = calc.min(calc.max(u, 0.0), 1.0)
         v = calc.min(calc.max(v, 0.0), 1.0)
       }
-      // 映射到像素坐标
+
       let px = u * (width - 1)
       let py = v * (height - 1)
       let x0 = calc.floor(px)
