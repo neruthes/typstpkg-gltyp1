@@ -1,8 +1,4 @@
-// gltyp1/drawcalls.C.typ
-// Draw-call constructors. Each returns a dictionary the rasterizer
-// understands. Extend with draw_line, draw_circle, draw_mesh, etc.
-
-#import "types.C.typ" as T
+#import "types.C.typ": *
 
 // Internal: normalize a fill argument (rgba dict or T.material) into a
 // material dictionary. Keeps draw_* signatures simple and future-proof.
@@ -12,7 +8,7 @@
     return fill
   }
   // plain color dict (r,g,b,a)
-  return T.material(albedo: fill)
+  return ShaderMaterial(albedo: fill)
 }
 
 #let draw-plain-triangle(a, b, c, fill) = {

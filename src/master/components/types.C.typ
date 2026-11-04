@@ -1,15 +1,9 @@
-
-
-
-
-
-
 #let rgba(r: 0.0, g: 0.0, b: 0.0, a: 1.0) = (r: r, g: g, b: b, a: a)
 
 #let color(r: 0.0, g: 0.0, b: 0.0, a: 1.0) = rgba(r: r, g: g, b: b, a: a)
 
 
-#let material(
+#let ShaderMaterial(
   albedo: none,
   normal: none,
   metallic: none,
@@ -36,26 +30,6 @@
   m
 }
 
-#let shader-material(
-  albedo: none,
-  shader_fragment: none,
-  normal: none,
-  metallic: none,
-  roughness: none,
-  ao: none,
-  emissive: none,
-) = material(
-  albedo: albedo,
-  normal: normal,
-  metallic: metallic,
-  roughness: roughness,
-  ao: ao,
-  emissive: emissive,
-  shader_fragment: shader_fragment,
-)
-
-
-#let shader-fragment(f) = f
 
 
 
@@ -69,21 +43,14 @@
 )
 
 
-#let vertex-shader(f) = (
+#let VertexShader(f) = (
   kind: "vertex_shader",
   run: f,
 )
 
 
-#let fragment-shader(f) = (
+#let FragmentShader(f) = (
   kind: "fragment_shader",
   run: f,
 )
 
-
-#let shader-program(vertex: none, fragment: none, uniforms: (:)) = (
-  kind: "shader_program",
-  vertex: vertex,
-  fragment: fragment,
-  uniforms: uniforms,
-)

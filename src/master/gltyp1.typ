@@ -5,6 +5,7 @@
 #import "components/texture.C.typ": *
 #import "components/shader.C.typ": *
 #import "components/noise.C.typ": *
+#import "components/canvas.C.typ": *
 
 
 // ---------- Geometry (internal for now) ----------

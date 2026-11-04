@@ -1,6 +1,6 @@
 #import "/src/master/gltyp1.typ" as gl
 
-#let generic-material = gl.shader-material(
+#let generic-material = gl.ShaderMaterial(
   albedo: gl.rgba(r: 1.0, g: 0.5, b: 0.0),
   shader_fragment: ray => {
     let ctx = ray.CTX
@@ -13,7 +13,7 @@
 
 
 
-#let my-material = gl.material(
+#let my-material = gl.ShaderMaterial(
   textures: (
     NoiseTexture1: gl.perlin-texture(
       seed: 42,
@@ -47,7 +47,7 @@
     (150, 100),
     (390, 120),
     (300, 290),
-    material: gl.shader-material(
+    material: gl.ShaderMaterial(
       shader_fragment: ray => {
         let s = ray.CTX.SCREEN_UV
         let cell = calc.floor(s.at(0) * 20) + calc.floor(s.at(1) * 20)
